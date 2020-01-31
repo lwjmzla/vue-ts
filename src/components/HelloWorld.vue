@@ -1,7 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <el-input v-model="foo" placeholder="请输入内容"></el-input>
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="密码" prop="foo">
+        <el-input v-model="ruleForm.foo" placeholder="请输入内容"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button>重置</el-button>
+      </el-form-item>
+    </el-form>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -39,7 +47,12 @@ import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
-  @Provide() foo = 'foo';
+  @Provide() ruleForm = {
+    foo: ''
+  };
+  @Provide() rules = {
+    foo: [{ required: true, message: '请选择活动区域', trigger: 'blur' }]
+  };
   created() {
     console.log(2);
     let arr_aa: string = '1';
@@ -49,7 +62,26 @@ export default class HelloWorld extends Vue {
       console.log(true);
     }
     let str = '1';
+    let obj = { a: 1 };
+    console.log(1);
     const resolve = (dir: any) => {};
+
+    let url = 'http://120.79.57.19:3335/getDiscList';
+    this.$http.get(url).then((res: any) => {
+      console.log(res);
+    });
+    this.$router.push('/abc');
+  }
+  submitForm() {
+    console.log(1);
+    (this.$refs.ruleForm as any).validate((valid: boolean) => {
+      if (valid) {
+        alert('submit!');
+      } else {
+        console.log('error submit!!');
+        return false;
+      }
+    });
   }
 }
 // import Vue from 'vue'

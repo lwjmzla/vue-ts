@@ -16,9 +16,9 @@ const resolve = (dir) => {
 // 自定义webpack
 module.exports = {
   // 基本的路径 baseUrl
-  // publicPath: "./",
+  publicPath: '/', // !这里会对应修改  process.env.BASE_URL
   // // 打包输出的路径
-  // outputDir: path.join(__dirname, "./dist", pjson.name),
+  //outputDir: path.join(__dirname, './dist', pjson.name),
   // /********************************css的配置 start********************************/
   // css: {
   //   // 分离插件
@@ -115,7 +115,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     port: 8000,
     compress: true, // 自动压缩
-    open: true, // 自动打开浏览器
+    open: false, // 自动打开浏览器
     inline: true, // 页面自动刷新
     hot: true //热更新,实时更新
   }
