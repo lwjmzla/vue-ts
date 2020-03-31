@@ -37,6 +37,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
+
+  // 声明周期钩子
+  mounted () {
+    //console.log('aa')
+  }
 }
 </script>
 
